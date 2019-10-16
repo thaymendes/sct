@@ -1,0 +1,102 @@
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo"></div>
+      <h4 no-margin>
+        <ion-text color="dark" class="fw700">
+          Entrar 
+        </ion-text>
+      </h4>
+    </div>
+
+    <!-- Login form -->
+    <p ion-text class="text08">
+        <ion-text color="warning">
+            {{errorMessage}}
+        </ion-text>
+      </p>
+    
+   
+    <form [formGroup]="validations_form" (ngSubmit)="loginUser(validations_form.value)" class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="mail" item-start></ion-icon>
+          Email
+        </ion-label>
+        <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+      </ion-item>
+      <p ion-text class="text08" *ngIf="validations_form.get('email').touched && validations_form.get('email').hasError('required')">
+        <ion-text color="warning">
+          Campo Obrigatório
+        </ion-text>
+      </p>
+
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon name="lock" item-start></ion-icon>
+          Senha
+        </ion-label>
+        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <p ion-text color="warning" class="text08" *ngIf="validations_form.get('password').touched && validations_form.get('password').hasError('required')">
+        <ion-text color="warning">
+          Campo Obrigatório
+        </ion-text>
+        </p>
+   
+
+    <p text-right tappable (click)="forgotPass()" class="paz">
+      <ion-text color="dark">
+        <strong>Esqueceu a senha?</strong>
+      </ion-text>
+    </p>
+
+    <div>
+        
+      <ion-button type="submit" icon-left size="medium" expand="full" shape="round" color="dark" [disabled]="!validations_form.valid" tappable>
+        <ion-icon name="log-in"></ion-icon>
+        Entrar
+      </ion-button>
+
+      <p text-center>
+        <ion-text color="dark">
+          Você pode entrar também por:
+        </ion-text>
+      </p>
+
+      <ion-grid class="btn-group">
+        <ion-row>
+          <ion-col size="4">
+            <ion-button shape="round" expand="full" color="secondary">
+              <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button shape="round" expand="full" color="secondary">
+              <ion-icon slot="icon-only" name="logo-twitter"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="4">
+            <ion-button shape="round" expand="full" color="secondary">
+              <ion-icon slot="icon-only" name="logo-googleplus"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+  </form>
+    <!-- Other links -->
+    <div text-center margin-top>
+      <span (click)="goToRegisterPage()" class="paz" tappable>
+        <ion-text color="dark">
+          Novo aqui? <strong>Cadastre-se</strong>
+        </ion-text>
+      </span>
+    </div>
+
+  </div>
+</ion-content>
