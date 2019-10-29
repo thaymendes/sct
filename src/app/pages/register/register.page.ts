@@ -51,7 +51,7 @@ export class RegisterPage implements OnInit {
      .then(res => {
        console.log(res); 
        this.presentToast( "Conta criada com sucesso. Já pode entrar no sistema.");
-       this.navCtrl.navigateForward('');
+       this.navCtrl.navigateForward('profile');
      }, err => {
        console.log(err);
        switch (err.code) {

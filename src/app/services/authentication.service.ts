@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor() { }
+  constructor(
+    private fAuth: AngularFireAuth
+  ) { }
 
 
   registerUser(value){
     return new Promise<any>((resolve, reject) => {
-      firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
+      this.fAuth.auth.createUserWithEmailAndPassword(value.email, value.password)
       .then(
         res => resolve(res),
         err => reject(err))
@@ -20,7 +22,7 @@ export class AuthenticationService {
   
    loginUser(value){
     return new Promise<any>((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(value.email, value.password)
+      this.fAuth.auth.signInWithEmailAndPassword(value.email, value.password)
       .then(
         res => resolve(res),
         err => reject(err))
@@ -29,8 +31,8 @@ export class AuthenticationService {
   
    logoutUser(){
      return new Promise((resolve, reject) => {
-       if(firebase.auth().currentUser){
-         firebase.auth().signOut()
+       if(this.fAuth.auth.currentUser){
+        this.fAuth.auth.signOut()
          .then(() => {
            console.log("LOG Out");
            resolve();
@@ -42,7 +44,12 @@ export class AuthenticationService {
    }
   
    userDetails(){
-     return firebase.auth().currentUser;
+     return this.fAuth.auth.currentUser;
    }
+
+   getAuth(){
+    return this.fAuth.auth;
+  }
+
 
 }
